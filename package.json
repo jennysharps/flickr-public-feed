@@ -1,0 +1,25 @@
+{
+  "name": "jls-flickr-public-feed",
+  "version": "2.0.0",
+  "devDependencies": {
+    "bower": "*",
+    "requirejs": "*",
+    "less": "*",
+    "express-less": "*"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "start": "node app/serve.js",
+    "test-prod": "npm production && npm connect:release",
+    "test": "npm test",
+    "prod-build": "app/build/build.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jenny-sharps/flickr-public-feed.git"
+  },
+  "dependencies": {
+    "express": "^4.13.3",
+    "express-less-middleware": "^1.4.4"
+  }
+}
