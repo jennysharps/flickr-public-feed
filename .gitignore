@@ -1,3 +1,5 @@
 dist
 app/vendor
 node_modules
+.nvm
+npm-debug.log

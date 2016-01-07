@@ -9,7 +9,7 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "start": "node app/serve.js",
+    "start": "nodemon app/served.js",
     "test-prod": "npm production && npm connect:release",
     "test": "npm test",
     "prod-build": "app/build/build.sh"
@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "express": "^4.13.3",
-    "express-less-middleware": "^1.4.4"
+    "express-less-middleware": "^1.4.4",
+    "nodemon": "^1.8.1"
   }
 }
