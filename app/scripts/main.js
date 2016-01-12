@@ -8,10 +8,13 @@ require.config({
 
 require([
 	'jquery',
+	'libs/underscore-template-helpers',
 	'views/app',
 	'models/flickr-photo',
-	'collections/flickr-photos'
-], function($, AppView, FlickrPhotoModel, FlickrPhotoCollection) {
+	'collections/flickr-photos',
+	'views/flickr-photo-view',
+	'views/flickr-photos-view'
+], function($, AppView, templateHelpers, FlickrPhotoModel, FlickrPhotoCollection, FlickrPhotoView, FlickrPhotosView) {
 	new AppView;
 	var photo = new FlickrPhotoModel({'name': "photo1"});
 	console.log(photo.get('name'));
@@ -25,13 +28,19 @@ require([
 	var $main = $('#main'),
 		$ul = $main.append('<ul>');
 
-	photoFeed.on('add', updateView);
+	//photoFeed.on('add', updateView);
 
 	photoFeed.fetch({
 		data: {
 			tagmode: 'all',
             tags: 'potato'
         }
+    }).then(function() {
+    	var photoView = new FlickrPhotoView({model: photoFeed.at(5)});
+		$main.append(photoView.render().el);
+
+		var photosView = new FlickrPhotosView({collection: photoFeed});
+		$main.append(photosView.render().el);
     });
 	window.feed = photoFeed;
 

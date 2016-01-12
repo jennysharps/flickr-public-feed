@@ -5,7 +5,8 @@ define([
 
 	model.defaults = {
 		name: null,
-		id: null
+		id: null,
+		link: null
 	};
 
 	model.initialize = function(attrs, options) {

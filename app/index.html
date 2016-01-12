@@ -10,41 +10,66 @@
     </head>
 
     <body>
-        <div id="main"></div>
+        <div id="main" class="container container-fluid"></div>
 
-        <div class="container container-fluid">
-            <div class="row">
-                <ul class="media-list">
-                    <li class="media">
-                        <a class="pull-left" href="http://www.flickr.com/photos/128924666@N04/23812609949/">
-                            <img class="media-object" src="http://farm2.staticflickr.com/1664/23812609949_920ce6dca3_m.jpg">
-                        </a>
+        <script type='text/template' id='PhotoViewTemplate'>
+            <header class="media-header">
+                <h1>
+                    <a href="<%= link %>"><%= title %></a>
+                </h1>
 
-                        <div class="media-body">
-                            <a href="/detail/23812609949/">
-                                <h4 class="media-heading">sliced potato with jalapeno and bacon</h4>
+                <a href="#" class="btn btn-primary btn-sm pull-right">Back</a>
+
+                <div class="media-meta">
+                    <a class="pull-left" href="<%= author.get('link') %>"><%= author.get('name') %></a>
+                    &nbsp;|&nbsp;Published: <%= formatTime(published, 'jS M Y') %> at <%= formatTime(published, 'G:i') %>
+                </div>
+            </header>
+
+            <div class="media">
+                <div class="media-left">
+                    <img class="media-object" src="<%= imgsrc %>">
+                </div>
+
+                <div class="media-body">
+                    <%= description %>
+
+                    <footer>
+                        <h3>Tags:</h3> 
+
+                        <% _.each(tags, function(tag){ %>
+                            <a target="_blank" href="https://www.flickr.com/search/?tags=<%= tag %>">
+                                <span class="label label-info"><%= tag %></span>
                             </a>
-
-                            <a class="button" href="128924666@N04">nobody@flickr.com (bour3cp1)</a>
-                        </div>
-                    </li>
-
-                    <li class="media">
-                        <a class="pull-left" href="http://www.flickr.com/photos/128924666@N04/23812609949/">
-                            <img class="media-object" src="http://farm2.staticflickr.com/1664/23812609949_920ce6dca3_m.jpg">
-                        </a>
-
-                        <div class="media-body">
-                            <a href="/detail/23812609949/">
-                                <h4 class="media-heading">sliced potato with jalapeno and bacon</h4>
-                            </a>
-
-                            <a class="button" href="128924666@N04">nobody@flickr.com (bour3cp1)</a>
-                        </div>
-                    </li>
-                </ul>
+                        <% }); %>
+                    </footer>
+                </div>
             </div>
-        </div>
+        </script>
+
+        <script type='text/template' id='PhotosViewTemplate'>
+            <li class="media">
+                <a class="pull-left" href="/photos/<%= id %>">
+                    <img class="media-object" src="<%= imgsrc %>">
+                </a>
+
+                <div class="media-body">
+                    <a href="/photos/<%= id %>">
+                        <h4 class="media-heading"><%= title %></h4>
+                    </a>
+
+                    <ul class="media-meta list-inline">
+                        <li>
+                            <a href="<%= author.get('link') %>"><%= author.get('name') %></a>
+                        </li>
+                        <li>Published: <%= formatTime(published, 'jS M Y') %> at <%= formatTime(published, 'G:i') %></li>
+                        <li>
+                            <a class="list-inline" href="<%= link %>">View on Flickr</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </script>
 
         <script data-main="scripts/main.js" src="vendor/requirejs/require.js"></script>
     </body>

@@ -10,6 +10,7 @@ define([
         link: null,
         imgsrc: null,
         published: null,
+        description: null,
         author: new AuthorModel(),
         tags: []
     };
@@ -28,10 +29,18 @@ define([
         attrs.imgsrc = res.media ? res.media.m : undefined;
         attrs.published = res.published;
 
+        var $description = $(res.description);
+
+        var authorInfo = $($description[0]).find('a');
         attrs.author = new AuthorModel({
-            name: res.author,
-            id: res.author_id
+            name: authorInfo.html(),
+            id: res.author_id,
+            link: authorInfo.attr('href')
         });
+
+        if($description.length > 3) {
+            attrs.description = _.last($description).innerHTML;
+        }
 
         if(res.tags) {
             attrs.tags = [];
